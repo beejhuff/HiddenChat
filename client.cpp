@@ -6,6 +6,8 @@
 
 #include <iostream>
 #include <netinet/in.h> // Para implementar la estructura sockaddr_in
+#include <stdlib.h> // exit()
+
 
 using namespace std;
 
@@ -22,7 +24,7 @@ int main(){
      que se encarga de usar el Protocolo de Control de Transmisión, protocolo
      principal en redes TCP/IP. Debe de ser el mismo tanto en cliente como en
      servidor.
-     3. estaFuera es una variable booleana la cual usaremos para terminar el
+     3. isExit es una variable booleana la cual usaremos para terminar el
      bucle
      4. El cliente leerá los caracteres de la conexión socket en una variable
      dinámica (buffer)
@@ -43,9 +45,36 @@ int main(){
 
   int client;
   int numPuerto = 1500;
-  bool estaFuera = false; // Variable booleana que usaremos para terminar el bucle
+  bool isExit = false;
   int bufsize = 1024;
+  char buffer[bufsize];
+  char* ip = "127.0.0.1";
 
   struct sockaddr_in server_direccion;
+
+  client = socket(AF_INET, SOCK_STREAM, 0);
+
+  /* ----------Estableciendo conexión con sockets ----------*/
+  /* --------------- socket() función ------------------*/
+
+  if (client < 0)
+  {
+      cout << "\nError estableciendo sockets..." << endl;
+      exit(1);
+  }
+
+  /*
+      La función socket() crea un nuevo socket.
+      Coge 3 argumento:,
+          a. AF_INET: dirección de dominio del socket.
+          b. SOCK_STREAM: Tipo de socket. Un stream socket en el cual los
+          caracteres son leídos en transmisión continua (TCP)
+          c. Protocolo de argumento: debería ser siempre 0. El sistema
+          operativo se encargará de escoger el mejor protocolo.
+          Esto devolverá un entero pequeño y será usado para todas las referencias
+          al socket. Si la llamada al socket falla, nos devolverá -1.
+  */
+
+  cout << "\n=> Los sockets del cliente han sido creados..." << endl;
 
  }
