@@ -7,6 +7,7 @@
 #include <iostream>
 #include <netinet/in.h> // Para implementar la estructura sockaddr_in
 #include <stdlib.h> // exit()
+#include <unistd.h> // close();
 
 
 using namespace std;
@@ -152,4 +153,17 @@ int main(){
 
     } while (!isExit);
 
- }
+    /* ------------ Llamada de Cierre ------------- */
+    /* ----------------- close() --------------- */
+
+    /*
+    Una vez que el servidor presione # para terminar la conexión, el bucle se
+    romperá y la conexión con el servidor socket y la conexión con el cliente
+    se acabará.
+    */
+
+    cout << "\n=> Conexión terminada.\nHasta luego...\n";
+
+    close(client);
+    return 0;
+}

@@ -6,10 +6,10 @@
 
 #include <iostream>
 #include <netinet/in.h> // Para implementar la estructura sockaddr_in
+#include <arpa/inet.h> // inet_ntoa
 #include <stdlib.h> // exit()
-#include <string.h> // strcpy();
-
-
+#include <string.h> // strcpy()
+#include <unistd.h> // close()
 
 using namespace std;
 
@@ -200,5 +200,30 @@ int main(){
                 }
             } while (*buffer != '*');
         } while (!isExit);
-      }
+
+        /*
+            Una vez que la conexión ya ha sido establecida, ambos extremos pueden
+            leer y escribir en la conexión. Naturalmente, cualquier cosa escrita por el
+            cliente será leido por el servidor, y cualquier cosa escrita por el servidor
+            será leida por el cliente.
+
+        /* ------------ Llamada de Cierre ------------- */
+        /* ----------------- close() --------------- */
+
+        /*
+            Una vez que el servidor presione # para terminar la conexión, el bucle se
+            romperá y la conexión con el servidor socket y la conexión con el cliente
+            se acabará.
+        */
+
+        // inet_ntoa convierte datos de paquetes en IP, las cuales han sido tomadas del cliente
+        cout << "\n\n=> Conexión terminada con la IP " << inet_ntoa(server_direccion.sin_addr);
+        close(server);
+        cout << "\nHasta luego..." << endl;
+        isExit = false;
+        exit(1);
+    }
+
+    close(client);
+    return 0;
 }
