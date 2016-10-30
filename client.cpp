@@ -77,4 +77,18 @@ int main(){
 
   cout << "\n=> Los sockets del cliente han sido creados..." << endl;
 
+  /*
+      La variable server_direccion es una estructura de sockaddr_in.
+      sin_family contiene un código para la dirección familia.
+      Siempre se debe de establecer en AF_INET.
+      INADDR_ANY contiene la dirección IP del host. Para el código del
+      servidor, siempre será la dirección IP de la máquina en la cual el
+      servidor está siendo ejecutado.
+      htons() convierte el número del puerto desde una orden byte del anfitrión
+      (host) hasta un número de puerto en una orden byte de la red (network).
+  */
+
+  server_direccion.sin_family = AF_INET;
+  server_direccion.sin_port = htons(numPuerto);
+
  }
