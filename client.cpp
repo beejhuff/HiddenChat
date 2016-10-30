@@ -6,9 +6,13 @@
 
 #include <iostream>
 #include <netinet/in.h> // Para implementar la estructura sockaddr_in
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <arpa/inet.h>
 #include <stdlib.h> // exit()
 #include <unistd.h> // close();
-
+#include <string.h>
+#include <netdb.h>
 
 using namespace std;
 
