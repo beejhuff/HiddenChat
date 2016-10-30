@@ -66,7 +66,7 @@ int main(){
 
   /*
       La función socket() crea un nuevo socket.
-      Coge 3 argumento:,
+      Coge 3 argumentos:
           a. AF_INET: dirección de dominio del socket.
           b. SOCK_STREAM: Tipo de socket. Un stream socket en el cual los
           caracteres son leídos en transmisión continua (TCP)
@@ -114,5 +114,40 @@ int main(){
 
     size = sizeof(server_direccion);
     cout << "=> Buscando clientes..." << endl;
+
+    listen(client, 1);
+
+    /*
+        La llamada a listen permite al proceso escuchar al socket para las
+        conexiones.
+        El programa lo que hará será permanecer inactivo si no hay ninguna conexión
+        entrante.
+        El primer argumento es el archivo descriptor del socket, el segundo es
+        el tamaño para el número de clientes, es decir, el número de conexiones
+        que el servidor es capaz de manejar mientras el proceso está manejando
+        una conexión particular. El máximo tamaño permitido por muchos sistemas
+        es 5.
+    */
+
+    /* ------------- Aceptando Clientes  ------------- */
+    /* ----------------- listen() ------------------- */
+
+    /*
+        La llamada a la aceptación() causa que el proceso se bloquee hasta que
+        un cliente se conecte al servidor. Por lo tanto, despierta un proceso
+        cuando la conexión del cliente ha sido correctamente establecida.
+        Este devuelve un nuevo fichero descriptivo, y todas las comunicaciones
+        en esta conexión deberían funcionar usando el nuevo archivo descriptivo.
+        El segundo argumento es una referencia puntero a la dirección del cliente
+        en el otro extremo de la conexión, y un tercer argumento que corresponde
+        al tamaño de la estructura.
+    */
+
+    int clientContador = 1;
+    server = accept(client,(struct sockaddr *)&server_direccion,&size);
+
+    // Primero comprueba si es váildo o no
+    if (server < 0) cout << "=> Error de aceptación..." << endl;
+
 
 }

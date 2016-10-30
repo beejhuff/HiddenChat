@@ -65,7 +65,7 @@ int main(){
 
   /*
       La función socket() crea un nuevo socket.
-      Coge 3 argumento:,
+      Coge 3 argumentos:
           a. AF_INET: dirección de dominio del socket.
           b. SOCK_STREAM: Tipo de socket. Un stream socket en el cual los
           caracteres son leídos en transmisión continua (TCP)
@@ -117,5 +117,9 @@ int main(){
           Importante tener en cuenta que el cliente necesita saber el número del
           puerto del servidor pero no su propio puerto.
       */
+
+    cout << "=> Esperando confirmación del servidor..." << endl; //line 40
+    recv(client, buffer, bufsize, 0);
+    cout << "=> Conexión confirmada, listo para proceder...";
 
  }
