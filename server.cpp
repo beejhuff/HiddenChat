@@ -93,5 +93,26 @@ int main(){
     server_direccion.sin_addr.s_addr = htons(INADDR_ANY);
     server_direccion.sin_port = htons(numPuerto);
 
+    /* ---------- Uniendo los Sockets ---------- */
+    /* ---------------- Unión() ---------------- */
+
+
+    if ((bind(client, (struct sockaddr*)&server_direccion,sizeof(server_direccion))) < 0)
+    {
+        cout << "=> Error al unir conexión, los sockets ya han sido establecidos..." << endl;
+        return -1;
+    }
+
+    /*
+        La llamada a Unión() une el socket a una dirección, en este caso la
+        dirección del host actual y el número del puerto en el cual el servidor
+        va a ser iniciado. Este coge 3 argumentos. EL segundo argumento es
+        un puntero a una estructura de tipo sockaddr, The second argument is a pointer
+        to a structure of type sockaddr, esto hará que se convierta en el tipo
+        correcto.
+    */
+
+    size = sizeof(server_direccion);
+    cout << "=> Buscando clientes..." << endl;
 
 }

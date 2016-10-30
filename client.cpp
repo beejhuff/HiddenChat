@@ -91,4 +91,31 @@ int main(){
   server_direccion.sin_family = AF_INET;
   server_direccion.sin_port = htons(numPuerto);
 
+  // esta función nos retorna un 1 si la IP es válida
+  // y 0 si es inválida
+  // inet_pton convierte la IP en paquetes
+  // inet_ntoa convierte de nuevo la IP en paquetes
+  //inet_pton(AF_INET, ip, &server_direccion.sin_addr);
+
+  /*if (connect(client,(struct sockaddr *)&server_direccion, sizeof(server_direccion)) == 0)
+      cout << "=> Conexión con el Servidor" << inet_ntoa(server_direccion.sin_addr) << " con número de puerto: " << numPuerto << endl;*/
+
+
+  /* ---------- Conectando los Sockets ---------- */
+  /* ---------------- Conexión() ---------------- */
+
+  if (connect(client,(struct sockaddr *)&server_direccion, sizeof(server_direccion)) == 0)
+      cout << "=> Connection to the server port number: " << numPuerto << endl;
+
+      /*
+          La función de conexión es llamada por el cliente para establecer la
+          conexión con el servidor. Tiene 3 argumentos, el archivo descriptor
+          del socket, la dirección del host en donde se quiere conectar
+          (incluyendo el número del purto), y el tamaño de la dirección.
+          Esta función retorna un 0 si todo sale bien y un -1 si algo sale
+          mal
+          Importante tener en cuenta que el cliente necesita saber el número del
+          puerto del servidor pero no su propio puerto.
+      */
+
  }
