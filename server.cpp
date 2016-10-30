@@ -11,5 +11,7 @@ using namespace std;
 int main(){
 
   int client, server;
+  int numPuerto = 1500;
+  bool estaFuera = false;
 
 }
