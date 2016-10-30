@@ -122,4 +122,34 @@ int main(){
     recv(client, buffer, bufsize, 0);
     cout << "=> Conexión confirmada, listo para proceder...";
 
+    cout << "\n\n=> Escribe # para terminar la conexión\n" << endl;
+
+    // Una vez que se llega aqúi, el cliente puede mandar el primer mensaje.
+
+    do {
+        cout << "Cliente: ";
+        do {
+            cin >> buffer;
+            send(client, buffer, bufsize, 0);
+            if (*buffer == '#') {
+                send(client, buffer, bufsize, 0);
+                *buffer = '*';
+                isExit = true;
+            }
+        } while (*buffer != 42);
+
+        cout << "Servidor: ";
+        do {
+            recv(client, buffer, bufsize, 0);
+            cout << buffer << " ";
+            if (*buffer == '#') {
+                *buffer = '*';
+                isExit = true;
+            }
+
+        } while (*buffer != 42);
+        cout << endl;
+
+    } while (!isExit);
+
  }

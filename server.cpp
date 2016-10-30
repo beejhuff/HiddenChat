@@ -7,6 +7,9 @@
 #include <iostream>
 #include <netinet/in.h> // Para implementar la estructura sockaddr_in
 #include <stdlib.h> // exit()
+#include <string.h> // strcpy();
+
+
 
 using namespace std;
 
@@ -149,5 +152,53 @@ int main(){
     // Primero comprueba si es váildo o no
     if (server < 0) cout << "=> Error de aceptación..." << endl;
 
+    while (server > 0)
+    {
+        strcpy(buffer, "=> Servidor conectado...\n");
+        send(server, buffer, bufsize, 0);
+        cout << "=> Conectado con el cliente #" << clientContador << ", puedes proceder..." << endl;
+        cout << "\n=> Escribe # para terminar la conexión\n" << endl;
 
+        /*
+            Importante recordar que sólo llegaremos a este punto siempre que el
+            cliente se haya conectado al servidor correctamente. Esto lo lee
+            desde el socket. La lectura se parará hasta que haya algo que leer en
+            el socket, es decir, después de que el cliente haya ejecutado el
+            envío(). Leerá ya sea el número total de caracteres en el socket
+            o 1024
+        */
+
+        cout << "Cliente: ";
+        do {
+            recv(server, buffer, bufsize, 0);
+            cout << buffer << " ";
+            if (*buffer == '#') {
+                *buffer = '*';
+                isExit = true;
+            }
+        } while (*buffer != '*');
+
+        do {
+            cout << "\nServidor: ";
+            do {
+                cin >> buffer;
+                send(server, buffer, bufsize, 0);
+                if (*buffer == '#') {
+                    send(server, buffer, bufsize, 0);
+                    *buffer = '*';
+                    isExit = true;
+                }
+            } while (*buffer != '*');
+
+            cout << "Cliente: ";
+            do {
+                recv(server, buffer, bufsize, 0);
+                cout << buffer << " ";
+                if (*buffer == '#') {
+                    *buffer == '*';
+                    isExit = true;
+                }
+            } while (*buffer != '*');
+        } while (!isExit);
+      }
 }
