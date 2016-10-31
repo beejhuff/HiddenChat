@@ -16,7 +16,7 @@
 
 using namespace std;
 
-int main(){
+int main(int argc, char* argv[]){
 
   /* ---------- INICIALIZACIÓN DE VARIABLES ---------- */
 
@@ -53,7 +53,6 @@ int main(){
   bool isExit = false;
   int bufsize = 1024;
   char buffer[bufsize];
-  char* ip = "127.0.0.1";
 
   struct sockaddr_in server_direccion;
 
@@ -95,6 +94,7 @@ int main(){
 
   server_direccion.sin_family = AF_INET;
   server_direccion.sin_port = htons(numPuerto);
+  inet_aton(argv[1], &server_direccion.sin_addr);
 
   // esta función nos retorna un 1 si la IP es válida
   // y 0 si es inválida
