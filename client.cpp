@@ -36,7 +36,6 @@ int main(int argc, char* argv[]){
      5. sockaddr_in es una estructura que contiene una dirección de internet.
      Esta estructura está ya definida en la librería netinet/in.h, así que no
      es necesario declararla nuevamente.
-
       Definición de la estructura:
       struct sockaddr_in
       {
@@ -53,6 +52,7 @@ int main(int argc, char* argv[]){
   bool isExit = false;
   int bufsize = 1024;
   char buffer[bufsize];
+  string clientName;
 
   struct sockaddr_in server_direccion;
 
@@ -131,12 +131,19 @@ int main(int argc, char* argv[]){
     cout << "********************************************" << endl;
     cout << "                HIDDEN CHAT                 " << endl;
     cout << "********************************************" << endl << endl;
+    cout << "Escribe tu nombre de usuario: ";
+    cin >> clientName;
+    cout << endl;
+    cout << "Has sido registrado como " << clientName << endl;
+    cout << "-------------------------------------------------" << endl;
+    cout << endl;
 
     // Una vez que se llega aqúi, el cliente puede mandar el primer mensaje.
 
     do {
         cout << endl;
-        cout << "Cliente: ";
+        cout << clientName << ": ";
+
         do {
             cin >> buffer;
             send(client, buffer, bufsize, 0);
@@ -171,7 +178,7 @@ int main(int argc, char* argv[]){
     se acabará.
     */
 
-    cout << "\n=> Conexión terminada.\nHasta luego...\n";
+    cout << "\n=> Conexión terminada.\nHasta luego...\n" << endl;
 
     close(client);
     return 0;

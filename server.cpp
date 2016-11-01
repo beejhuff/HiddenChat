@@ -35,9 +35,7 @@ int main(){
      5. sockaddr_in es una estructura que contiene una dirección de internet.
      Esta estructura está ya definida en la librería netinet/in.h, así que no
      es necesario declararla nuevamente.
-
       Definición de la estructura:
-
       struct sockaddr_in
       {
         short   sin_family;
@@ -213,7 +211,6 @@ int main(){
             leer y escribir en la conexión. Naturalmente, cualquier cosa escrita por el
             cliente será leido por el servidor, y cualquier cosa escrita por el servidor
             será leida por el cliente.
-
         /* ------------ Llamada de Cierre ------------- */
         /* ----------------- close() --------------- */
 
@@ -224,9 +221,9 @@ int main(){
         */
 
         // inet_ntoa convierte datos de paquetes en IP, las cuales han sido tomadas del cliente
-        cout << "\n\n=> Conexión terminada con la IP " << inet_ntoa(server_direccion.sin_addr);
+        cout << "\n\n=> Conexión terminada con la IP " << inet_ntoa(server_direccion.sin_addr) << endl;
         close(server);
-        cout << "\nHasta luego..." << endl;
+        cout << "\nHasta luego..." << endl << endl;
         isExit = false;
         exit(1);
     }
