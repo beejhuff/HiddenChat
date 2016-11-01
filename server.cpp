@@ -159,7 +159,11 @@ int main(){
         strcpy(buffer, "=> Servidor conectado...\n");
         send(server, buffer, bufsize, 0);
         cout << "=> Conectado con el cliente #" << clientContador << ", puedes proceder..." << endl;
-        cout << "\n=> Escribe # para terminar la conexión\n" << endl;
+        cout << "\n\n=> Escribe # para terminar la conexión\n" << endl;
+        cout << "-------------------------------------------------------------------------" << endl << endl;
+        cout << "********************************************" << endl;
+        cout << "                HIDDEN CHAT                 " << endl;
+        cout << "********************************************" << endl << endl;
 
         /*
             Importante recordar que sólo llegaremos a este punto siempre que el
@@ -169,7 +173,7 @@ int main(){
             envío(). Leerá ya sea el número total de caracteres en el socket
             o 1024
         */
-
+        cout << endl;
         cout << "Cliente: ";
         do {
             recv(server, buffer, bufsize, 0);
@@ -181,6 +185,7 @@ int main(){
         } while (*buffer != '*');
 
         do {
+            cout << endl;
             cout << "\nServidor: ";
             do {
                 cin >> buffer;
@@ -191,7 +196,7 @@ int main(){
                     isExit = true;
                 }
             } while (*buffer != '*');
-
+            cout << endl;
             cout << "Cliente: ";
             do {
                 recv(server, buffer, bufsize, 0);

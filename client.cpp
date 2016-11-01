@@ -110,7 +110,7 @@ int main(int argc, char* argv[]){
   /* ---------------- Conexión() ---------------- */
 
   if (connect(client,(struct sockaddr *)&server_direccion, sizeof(server_direccion)) == 0)
-      cout << "=> Connection to the server port number: " << numPuerto << endl;
+      cout << "=> Conexión con el número de puerto: " << numPuerto << endl;
 
       /*
           La función de conexión es llamada por el cliente para establecer la
@@ -125,13 +125,17 @@ int main(int argc, char* argv[]){
 
     cout << "=> Esperando confirmación del servidor..." << endl; //line 40
     recv(client, buffer, bufsize, 0);
-    cout << "=> Conexión confirmada, listo para proceder...";
-
+    cout << "=> Conexión confirmada, listo para proceder..." << endl;
     cout << "\n\n=> Escribe # para terminar la conexión\n" << endl;
+    cout << "-------------------------------------------------------------------------" << endl << endl;
+    cout << "********************************************" << endl;
+    cout << "                HIDDEN CHAT                 " << endl;
+    cout << "********************************************" << endl << endl;
 
     // Una vez que se llega aqúi, el cliente puede mandar el primer mensaje.
 
     do {
+        cout << endl;
         cout << "Cliente: ";
         do {
             cin >> buffer;
@@ -143,6 +147,7 @@ int main(int argc, char* argv[]){
             }
         } while (*buffer != 42);
 
+        cout << endl;
         cout << "Servidor: ";
         do {
             recv(client, buffer, bufsize, 0);
